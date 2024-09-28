@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ransomware Readiness Questionnaire</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background: #35424a;
+            color: #ffffff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+            min-height: 71vh;
+            background: #ffffff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: white;
+        }
+        .question {
+            display: none;
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            background: #35424a;
+            color: #ffffff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #35424a;
+            color: #ffffff;
+        }
+        .options {
+            margin: 10px 0;
+        }
+        label {
+            margin-right: 10px;
+        }
+
+        input[type="radio"] {
+            margin-top: 10px;
+            font-family: "Roboto", sans-serif;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 30px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            position: relative;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(135deg, #4caf50 25%, lightgreen 25%, lightgreen 50%, #4caf50 50%, #4caf50 75%, lightgreen 75%, lightgreen 100%);
+            background-size: 30px 30px;
+            animation: move 1s linear infinite;
+            transition: width 0.5s ease;
+        }
+
+        @keyframes move {
+            from {
+                background-position: 0 0;
+            }
+            to {
+                background-position: 30px 0;
+            }
+        }
+
+        .progress-text {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            top: 0;
+            left: 0;
+            font-weight: bold;
+            color: #35424a;
+        }
+
+        .quiz-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.quiz-btn:hover {
+    background-color: #0056b3;
+}
+
+.quiz-btn:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.quiz-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.question h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.options {
+    margin-bottom: 20px;
+}
+
+.option-label {
+    display: block;
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Ransomware Readiness Questionnaire</h1>
+</header>
+
+<div class="container">
+    <h2>Assess Your Organization's Ransomware Readiness</h2>
+
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar" style="width: 0%;"></div>
+        <div class="progress-text" id="progressText">0%</div>
+    </div>
+
+
+    <div id="questionContainer">
+        <div class="question" id="question1">
+            <strong>1. Do you have a data backup plan in place?</strong>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="q1" value="true">Yes</label><br>
+                <label class="option-label"><input type="radio" name="q1" value="false">No</label><br>
+            </div>
+            <button class="quiz-btn" onclick="nextQuestion(1)">Next</button>
+        </div>
+
+        <div class="question" id="question2">
+            <strong>2. Have you conducted recent cybersecurity training for employees?</strong>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="q2" value="true">Yes</label><br>
+                <label class="option-label"><input type="radio" name="q2" value="false">No</label><br>
+            </div>
+            <button class="quiz-btn" onclick="nextQuestion(2)">Next</button>
+        </div>
+
+        <div class="question" id="question3">
+            <strong>3. Are you using up-to-date antivirus software?</strong>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="q3" value="true">Yes</label><br>
+                <label class="option-label"><input type="radio" name="q3" value="false">No</label><br>
+            </div>
+            <button class="quiz-btn" onclick="nextQuestion(3)">Next</button>
+        </div>
+
+        <div class="question" id="question4">
+            <strong>4. Your organization receives a suspicious email with a link. What do you do?</strong>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="q4" value="a"> Click the link to see what it is.</label><br>
+                <label class="option-label"><input type="radio" name="q4" value="b"> Report the email to IT.</label><br>
+                <label class="option-label"><input type="radio" name="q4" value="c"> Ignore the email.</label><br>
+                <label class="option-label"><input type="radio" name="q4" value="d"> Forward it to colleagues.</label>
+            </div>
+            <button class="quiz-btn" onclick="nextQuestion(4)">Next</button>
+        </div>
+
+        <div class="question" id="question5">
+            <strong>5. Your team has been informed of a recent ransomware attack affecting similar organizations. What action should you take?</strong>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="q5" value="a"> Review and update your backup procedures.</label><br>
+                <label class="option-label"><input type="radio" name="q5" value="b"> Do nothing; it's not our problem.</label><br>
+                <label class="option-label"><input type="radio" name="q5" value="c"> Wait for management to address it.</label><br>
+                <label class="option-label"><input type="radio" name="q5" value="d"> Send an email to all employees about it.</label>
+            </div>
+            <button class="quiz-btn" onclick="nextQuestion(5)">Next</button>
+        </div>
+
+        <div class="question" id="question6">
+            <strong>6. A ransomware alert pops up on your computer while working. How do you respond?</strong>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="q6" value="a"> Reboot the computer immediately.</label><br>
+                <label class="option-label"><input type="radio" name="q6" value="b"> Disconnect from the internet and inform IT.</label><br>
+                <label class="option-label"><input type="radio" name="q6" value="c"> Ignore it and continue working.</label><br>
+                <label class="option-label"><input type="radio" name="q6" value="d"> Take a screenshot and post it on social media.</label>
+            </div>
+            <button class="quiz-btn" onclick="nextQuestion(6)">Next</button>
+        </div>
+
+        <div class="question" id="question7">
+            <strong>7. You discover that a coworker has accidentally clicked on a malicious link in an email. What is your immediate action?</strong>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="q7" value="a"> Advise them to ignore it; it's probably nothing.</label><br>
+                <label class="option-label"><input type="radio" name="q7" value="b"> Inform IT immediately to assess any potential damage.</label><br>
+                <label class="option-label"><input type="radio" name="q7" value="c"> Delete the email for them and move on.</label><br>
+                <label class="option-label"><input type="radio" name="q7" value="d"> Discuss it with other colleagues to see if they experienced the same issue.</label>
+            </div>
+            <button class="quiz-btn" onclick="nextQuestion(7)">Next</button>
+        </div>
+
+        <div class="question" id="question8">
+            <strong>8. During a routine check, your IT department discovers that several systems have not been backed up in a while. What should you do?</strong>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="q8" value="a"> Alert the team to back up their files immediately.</label><br>
+                <label class="option-label"><input type="radio" name="q8" value="b"> Wait for IT to address it in their own time.</label><br>
+                <label class="option-label"><input type="radio" name="q8" value="c"> Assume everything is fine since nothing has happened yet.</label><br>
+                <label class="option-label"><input type="radio" name="q8" value="d"> File a complaint about IT's lack of diligence.</label>
+            </div>
+            <button class="quiz-btn" onclick="nextQuestion(8)">Next</button>
+        </div>
+
+        <div class="question" id="question9">
+            <strong>9. Your organization is planning to implement new security software to combat ransomware. What should you do?</strong>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="q9" value="a"> Participate in training sessions to understand how to use it effectively.</label><br>
+                <label class="option-label"><input type="radio" name="q9" value="b"> Resist the change; the current system is good enough.</label><br>
+                <label class="option-label"><input type="radio" name="q9" value="c"> Ignore the updates and continue using your personal devices.</label><br>
+                <label class="option-label"><input type="radio" name="q9" value="d"> Request additional features that you think would be beneficial.</label>
+            </div>
+            <button class="quiz-btn" onclick="nextQuestion(9)">Next</button>
+        </div>
+
+        <div class="question" id="question10">
+            <strong>10. A colleague mentions they are using personal devices for work tasks. What is your response?</strong>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="q10" value="a"> Advise them to stop immediately and use only company devices.</label><br>
+                <label class="option-label"><input type="radio" name="q10" value="b"> Tell them it's okay as long as they are careful.</label><br>
+                <label class="option-label"><input type="radio" name="q10" value="c"> Ignore their comment; it's their choice.</label><br>
+                <label class="option-label"><input type="radio" name="q10" value="d"> Suggest they speak with IT for guidance.</label>
+            </div>
+            <button class="quiz-btn" onclick="nextQuestion(10)">Next</button>
+        </div>
+
+
+            <div class="question" id="results" style="display:none;">
+            <h3>Thank you for completing the questionnaire!</h3>
+            <p>Your responses have been recorded.</p>
+                <form name="result-form" method="post" action="{{ url_for('generate_results') }}">
+                    <input type="hidden" id="resultsInput" name="results">
+                    <input type="submit" id="submit-btn" value="Submit">
+                </form>
+            </div>
+    </div>
+
+
+</div>
+
+
+<footer>
+    <p>&copy; 2024 Ransomware Readiness Assessment Tool</p>
+</footer>
+
+<script>
+    let currentQuestion = 0;
+    const totalQuestions = 10;
+
+    let results = []
+
+    document.getElementById(`question${currentQuestion + 1}`).style.display = "block";
+
+    function submit_results(){
+        document.getElementById('results').style.display="block";
+        const hidden_input = document.getElementById('resultsInput')
+            hidden_input.value = results.join(',');
+    }
+
+    function nextQuestion(currentQuestion) {
+
+        const current = document.getElementById(`question${currentQuestion}`);
+
+        const radios = document.getElementsByName("q"+currentQuestion);
+
+        var checked = false;
+
+        for(const radio of radios){
+            if(radio.checked){checked=true;
+            results.push(radio.value)
+            break;
+            }
+        }
+
+        if(checked){
+        current.style.display = 'none';
+
+        const next = document.getElementById(`question${currentQuestion + 1}`);
+        if (currentQuestion<totalQuestions) {
+            next.style.display = 'block';
+        } else {
+            submit_results()
+        }
+
+        const progressPercentage = ((currentQuestion) / totalQuestions) * 100;
+        const progressbar = document.getElementById('progressBar')
+        progressbar.style.width = progressPercentage + '%';
+        document.getElementById('progressText').innerText = Math.round(progressPercentage) + '%';
+    }
+    else {
+        alert("Choose a value before proceeding to next..")
+    }
+    }
+
+</script>
+
+</body>
+</html>

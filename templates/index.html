@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ransomware Risk Assessment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://cdn.pixabay.com/photo/2020/05/06/14/30/network-5131309_960_720.jpg'); /* Replace with your preferred background */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            margin-top: 2%;
+        }
+        
+        .container {
+            width: 95%;
+            margin: 0 auto;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.8); /* Transparent dark overlay for readability */
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            position: relative; /* Added for button positioning */
+            height: 650px;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        header h1 {
+            color: #00ffff;
+            font-size: 2.5rem;
+        }
+        
+        .test-btn {
+            padding: 15px 25px;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: background-color 0.3s ease;
+            font-size: small;
+        }
+        
+        .test-btn:hover {
+            background-color: #00bfff;
+        }
+        
+        .assessment-intro {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 5px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
+            margin-bottom: 20px;
+            margin-top: 1%;
+        
+        }
+        
+        .reasons {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        
+        .reason-item {
+            display: flex;
+            align-items: center;
+            font-size: 1.2rem;
+        }
+        
+        .reason-item span {
+            font-size: 30px;
+            margin-right: 10px;
+            color: #00ffb3;
+        }
+        
+        .attack-chain {
+            display: flex; /* Horizontal layout for the steps */
+            justify-content: space-between;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .step {
+            flex: 1;
+            background-color: #fff;
+            color: #000;
+            padding: 10px;
+            margin: 0 5px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-weight: bold;
+        }
+        
+        .attack-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .detail {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            width: 30%;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
+            font-size: 1.1rem;
+        }
+        
+        .detail h3 {
+            margin-bottom: 10px;
+            color: #00ffff;
+        }
+        
+        .detail p {
+            font-size: 1rem;
+            color: #eee;
+        }
+        
+        /* Centered bottom button */
+        .test-b {
+            padding: 15px 25px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            position: absolute;
+            left: 50%;
+            bottom: 20px;
+            transform: translateX(-50%); /* Center horizontally */
+        }
+
+        .test-b:hover {
+            background-color: #0056b3;
+        }
+        h5{
+            font-size: medium;
+            color: #00ffff;
+            margin-left: 3%;
+        }
+        .newpara{
+            display: flex;
+            justify-content: space-between;
+            color: #ffcbcb;
+            
+            margin-top: 3px;
+            padding-left: 55px;
+            padding-top: 10px;
+            margin-bottom: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
+            font-size: 1.1rem;
+            height: 80px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Ransomware Risk Assessment</h1>
+            <a href="{{ url_for('testing_page') }}" class="test-btn">Test My Ransomware Defenses</a>
+        </header>
+
+        <div class="newpara">
+            <p><b>Ransomware attacks are at a record high, threatening organizations with financial <br>
+                and reputational risk. Run this web-based test to assess your organization’s <br>
+                defenses against popular ransomware attack tactics.</b></p>
+        </div>
+         <h5>Why run this Assessment?</h5>
+        <section class="assessment-intro">
+            <div class="reasons">
+                <div class="reason-item">
+                    <span>✔</span>
+                    <p>Safe, non-invasive test runs in seconds</p>
+                </div>
+                <div class="reason-item">
+                    <span>🛡</span>
+                    <p>Uncover risks and vulnerabilities</p>
+                </div>
+                <div class="reason-item">
+                    <span>📘</span>
+                    <p>Learn how to improve your ransomware risk posture</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="attack-chain">
+            <div class="step">
+                <i class="fas fa-user-secret"></i>
+                <p><b>Attacker</b></p>
+            </div>
+            <div class="step">
+                <i class="fas fa-shield-alt"></i>
+                <p><b>Initial Compromise</b></p>
+            </div>
+            <div class="step">
+                <i class="fas fa-network-wired"></i>
+                <p><b>Lateral Movement</b></p>
+            </div>
+            <div class="step">
+                <i class="fas fa-file-export"></i>
+                <p><b>Data Loss/Exfiltration</b></p>
+            </div>
+            <div class="step">
+                <i class="fas fa-lock"></i>
+                <p><b>Ransomware Execution</b></p>
+            </div>
+        </section>
+
+        <section class="attack-details">
+            <div class="detail">
+                <h3>Initial Compromise</h3>
+                <p>The first thing an attacker must do is gain entry into a system, often by tricking a user into downloading an infected file or clicking a malicious link. Your first line of defense is to block these actions.</p>
+            </div>
+            <div class="detail">
+                <h3>Lateral Movement</h3>
+                <p>Once an attacker is in your system, they attempt to move around the network to cause damage or steal valuable assets. Many legacy security tools allow broad access to valuable assets once an attacker gets in.</p>
+            </div>
+            <div class="detail">
+                <h3>Data Loss/Exfiltration</h3>
+                <p>Many attacks include data theft, such as PII, financial data, or intellectual property. Your security controls must recognize and stop attempts to steal valuable data.</p>
+            </div>
+        </section>
+
+        <a href="{{ url_for('testing_page') }}" class="test-b">Test My Ransomware Defenses</a>
+    </div>
+
+    <script>
+
+        function test(){
+            document.writeln("I request sai teja to handle from here");
+        }
+        function newtest(){
+            test();
+            
+        }
+
+    </script>
+</body>
+</html>
