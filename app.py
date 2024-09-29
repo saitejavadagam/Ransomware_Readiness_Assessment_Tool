@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request, jsonify, redirect
-from sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///progress.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -20,10 +22,6 @@ class ProgressData(db.Model):
         self.color = color
         self.comment = comment
 
-
-@app.before_first_request
-def create_tables():
-    db.create_all()
 
 def generate_color_comment(progress):
     if progress >= 90:
@@ -76,9 +74,11 @@ def generate_results():
         if results[i] == answer_key[i]:
             score += 1
 
-    progress = (100*score)//total
+    progress = (100 * score) // total
     print(progress)
     color, comment = generate_color_comment(progress)
+
+    db.create_all()
 
     new_entry = ProgressData(progress=progress, color=color, comment=comment)
 
@@ -92,6 +92,32 @@ def generate_results():
 @app.route('/test3')
 def test3():
     return "this is the page where machine learning is done there"
+
+
+data = {}
+values = {}
+
+
+@app.route('/receive_data', methods=['POST'])
+def receive_data():
+    global data
+    data = request.json
+    print(data)
+
+    progress = data['Defender_score'] * 100 // data['total_score']
+    color, comment = generate_color_comment(progress)
+    global values
+    values = {
+        'progress': progress,
+        'color': color,
+        'comment': comment
+    }
+    return "success"
+
+
+@app.route('/client_results')
+def wait_for_data():
+    return render_template('face.html', progress=values['progress'], color=values['color'], comment=values['comment'])
 
 
 if __name__ == '__main__':

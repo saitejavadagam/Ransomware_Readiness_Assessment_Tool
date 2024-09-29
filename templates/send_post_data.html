@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Redirecting...</title>
+    <script>
+
+        const progress = "{{ progress }}";
+        const color = "{{ color }}";
+        const comment = "{{ comment }}";
+
+        function sendData() {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/face';
+
+            const progressInput = document.createElement('input');
+            progressInput.type = 'hidden';
+            progressInput.name = 'progress';
+            progressInput.value = progress;
+
+            const colorInput = document.createElement('input');
+            colorInput.type = 'hidden';
+            colorInput.name = 'color';
+            colorInput.value = color;
+
+            const commentInput = document.createElement('input');
+            commentInput.type = 'hidden';
+            commentInput.name = 'comment';
+            commentInput.value = comment;
+
+            form.appendChild(progressInput);
+            form.appendChild(colorInput);
+            form.appendChild(commentInput);
+
+            document.body.appendChild(form);
+            form.submit();
+        }
+
+        window.onload = sendData;
+    </script>
+</head>
+<body>
+    <p>Redirecting...</p>
+</body>
+</html>

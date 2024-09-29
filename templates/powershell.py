@@ -1,4 +1,8 @@
 import subprocess
+import webbrowser
+
+import requests
+import json
 
 command_text = '(Get-MpPreference).'
 
@@ -77,3 +81,21 @@ def assess_defender_score(defender_params_status):
 final_score, total_score, error_list = assess_defender_score(final_result)
 print(f"Defender Score: {final_score}/{total_score}")
 print(error_list)
+
+server_url = 'http://127.0.0.1:5000/receive_data'
+
+data_to_send = {
+    'Defender_score': final_score,
+    'total_score': total_score,
+    'error_list': error_list
+}
+
+try:
+    response = requests.post(server_url, json=data_to_send)
+    if response.status_code == 200:
+        print("Success")
+        webbrowser.open("http://127.0.0.1:5000/client_results")
+    else:
+        print("Failed")
+except Exception as e:
+    print(f"Error: {e}")
