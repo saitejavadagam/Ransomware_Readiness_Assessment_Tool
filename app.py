@@ -36,6 +36,20 @@ def generate_color_comment(progress):
         return 'red', 'Very limited knowledge, considerable improvement required.'
 
 
+def generate_color_comment_system(progress):
+    if progress >= 90:
+        return 'green', 'Excellent understanding of ransomware defenses! Your system is well-protected with advanced measures in place.'
+    elif progress >= 75:
+        return 'greenyellow', 'Good understanding of ransomware defenses. Your system has solid protections, but consider enhancing your backup strategies.'
+    elif progress >= 50:
+        return 'yellow', 'Fair knowledge of ransomware defenses. Your system is partially protected, but you need to strengthen your detection and response protocols.'
+    elif progress >= 25:
+        return 'orange', 'Basic understanding of ransomware defenses. Your system is at risk; focus on implementing essential security measures and awareness training.'
+    else:
+        return 'red', 'Very limited knowledge of ransomware defenses. Your system is highly vulnerable; immediate action is required to implement basic protections and educate staff.'
+
+
+
 @app.route('/')
 def index_page():
     return render_template('index.html')
@@ -78,14 +92,6 @@ def generate_results():
     print(progress)
     color, comment = generate_color_comment(progress)
 
-    db.create_all()
-
-    new_entry = ProgressData(progress=progress, color=color, comment=comment)
-
-    # Add and commit to the database
-    db.session.add(new_entry)
-    db.session.commit()
-
     return render_template('face.html', progress=progress, color=color, comment=comment)
 
 
@@ -105,7 +111,7 @@ def receive_data():
     print(data)
 
     progress = data['Defender_score'] * 100 // data['total_score']
-    color, comment = generate_color_comment(progress)
+    color, comment = generate_color_comment_system(progress)
     global values
     values = {
         'progress': progress,
