@@ -10,6 +10,22 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
+defender_params_comments = {
+    "EnableControlledFolderAccess": "To enable, go to Settings > Privacy & Security > Windows Security > Virus & threat protection > Manage ransomware protection. Turn on Controlled folder access.",
+    "AttackSurfaceReductionRules_Actions": "To enable, configure the rules in the Microsoft Defender Security Center under Attack Surface Reduction.",
+    "AttackSurfaceReductionRules_Ids": "To enable, identify the specific rule IDs to be activated in the Defender settings.",
+    "AttackSurfaceReductionRules_RuleSpecificExclusions": "To disable, remove specific rules that you do not want to enforce from the exclusions list.",
+    "PUAProtection": "To enable, go to Settings > Privacy & Security > Windows Security > Virus & threat protection settings. Turn on Potentially unwanted app blocking.",
+    "EnableNetworkProtection": "To enable, navigate to Windows Security > App & browser control > Exploit protection > Network protection and turn it on.",
+    "DisableRemovableDriveScanning": "To disable, go to Settings > Privacy & Security > Windows Security > Virus & threat protection settings and turn off the scanning of removable drives.",
+    "DisableRealtimeMonitoring": "To disable, open Windows Security, go to Virus & threat protection, and turn off Real-time protection.",
+    "CloudBlockLevel": "To enable, configure cloud-delivered protection in Windows Security under Virus & threat protection settings.",
+    "DisableTamperProtection": "To disable, go to Settings > Privacy & Security > Windows Security > Virus & threat protection settings and turn off Tamper protection.",
+    "SignatureUpdateInterval": "To configure, adjust the frequency of signature updates in Windows Security settings under Virus & threat protection.",
+    "BruteForceProtectionAggressiveness": "To configure, set the aggressiveness level for brute force protection in Defender settings.",
+    "CloudExtendedTimeout": "To configure, set the extended timeout period for cloud protection in the Defender settings."
+}
+
 
 class ProgressData(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -92,7 +108,7 @@ def generate_results():
     print(progress)
     color, comment = generate_color_comment(progress)
 
-    return render_template('face.html', progress=progress, color=color, comment=comment)
+    return render_template('progress.html', progress=progress, color=color, comment=comment)
 
 
 @app.route('/test3')
@@ -123,7 +139,9 @@ def receive_data():
 
 @app.route('/client_results')
 def wait_for_data():
-    return render_template('face.html', progress=values['progress'], color=values['color'], comment=values['comment'])
+
+    error_list = [values['comment']]+[i+' : '+defender_params_comments[i] for i in data['error_list']]
+    return render_template('progress.html', progress=values['progress'], color=values['color'], error_list=error_list)
 
 
 if __name__ == '__main__':
