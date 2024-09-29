@@ -1,6 +1,41 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect
+from sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///progress.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
+
+class ProgressData(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    progress = db.Column(db.Integer, nullable=False)
+    color = db.Column(db.String(50), nullable=False)
+    comment = db.Column(db.String(200), nullable=False)
+
+    def __init__(self, progress, color, comment):
+        self.progress = progress
+        self.color = color
+        self.comment = comment
+
+
+@app.before_first_request
+def create_tables():
+    db.create_all()
+
+def generate_color_comment(progress):
+    if progress >= 90:
+        return 'green', 'Excellent understanding of ransomware knowledge!'
+    elif progress >= 75:
+        return 'greenyellow', 'Good understanding, but there is room for improvement.'
+    elif progress >= 50:
+        return 'yellow', 'Fair knowledge, but more study is needed to improve.'
+    elif progress >= 25:
+        return 'orange', 'Basic understanding, focus on learning more.'
+    else:
+        return 'red', 'Very limited knowledge, considerable improvement required.'
 
 
 @app.route('/')
@@ -16,8 +51,6 @@ def testing_page():
 @app.route('/results', methods=['POST'])
 def generate_results():
     results = list(map(str, request.form.get('results').split(',')))
-    print(type(results))
-    print(results)
 
     answer_key = [
         'true',  # Q1: Do you have a data backup plan in place?
@@ -45,8 +78,15 @@ def generate_results():
 
     progress = (100*score)//total
     print(progress)
-    color = 'blue'
-    return render_template('face.html', progress=progress, color=color)
+    color, comment = generate_color_comment(progress)
+
+    new_entry = ProgressData(progress=progress, color=color, comment=comment)
+
+    # Add and commit to the database
+    db.session.add(new_entry)
+    db.session.commit()
+
+    return render_template('face.html', progress=progress, color=color, comment=comment)
 
 
 @app.route('/test3')
