@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" >
     <title>Test Choice</title>
     <style>
 
@@ -50,22 +51,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     box-sizing: border-box;
     text-decoration: none;
-}
-
-.choice-card:hover {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-}
-
-.choice-card:active {
-    transform: scale(.98);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-}
-
-.choice-card h3 {
-    margin: 10px 0 0 0;
 }
 
 .icon {
@@ -74,12 +62,36 @@
     margin-bottom: 10px;
 }
 
+.choice-card:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    .icon {
+        font-size: 40px;
+    }
+    font-size: 1em;
+}
+
+.choice-card:active {
+    transform: scale(.98);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    .icon {
+        color:black;
+    }
+
+}
+
+.choice-card h3 {
+    margin: 10px 0 0 0;
+}
+
+
+
+
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Start your test</h1>
+    <h1>Choose you Assessment</h1>
 </header>
 
 <div class="container">

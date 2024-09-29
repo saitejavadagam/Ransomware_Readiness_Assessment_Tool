@@ -73,7 +73,7 @@ def index_page():
     return render_template('index.html')
 
 
-@app.route('/test')
+@app.route('/user_test')
 def testing_page():
     return render_template('test.html')
 

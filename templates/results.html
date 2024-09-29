@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Security Test Results</title>
-    <!-- Bootstrap CSS -->
+    <title>System Test Results</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -33,94 +33,103 @@
             padding: 40px;
             background-color: #ffffff;
             border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            border-left: 5px solid #007bff;
-            border-right: 5px solid #007bff;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s;
         }
 
-        .result-container:hover {
-            transform: translateY(-5px);
-        }
+        .result-container {
+    margin-top: 50px;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 
-        h1 {
-            font-weight: 700;
-            color: #007bff;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 30px;
-            font-size: 2.5rem;
-        }
+    transition: transform 0.3s, box-shadow 0.3s;
+}
 
-        h2 {
-            color: #17a2b8;
-            font-size: 1.85rem;
-            font-weight: 600;
-            margin-top: 25px;
-            margin-bottom: 15px;
-            border-bottom: 3px solid #17a2b8;
-            padding-bottom: 10px;
-        }
+.result-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+}
 
-        h3 {
-            color: #6c757d;
-            font-size: 1.4rem;
-            margin-top: 30px;
-            font-weight: 500;
-        }
+h1 {
+    font-weight: 700;
+    color: #007bff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    text-align: center; /* Center the title */
+}
 
-        .graph-container {
-            padding: 30px;
-            border-radius: 15px;
-            background-color: #f8f9fa;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            text-align: center;
-            transition: background-color 0.3s;
-        }
+.graph-container {
+    padding: 30px;
+    border-radius: 15px;
+    background-color: #f8f9fa;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: background-color 0.3s;
+}
 
-        .graph-container:hover {
-            background-color: #e2e6ea;
-        }
+.graph-container:hover {
+    background-color: #e2e6ea;
+}
 
-        ul {
-            list-style: none;
-            padding-left: 0;
-            margin-top: 20px;
-        }
+.row {
+    margin: 0; /* Remove margin for better alignment */
+}
 
-        ul li {
-            padding: 8px 0;
-            font-size: 1.2rem;
-            color: #495057;
-            border-bottom: 1px solid #e9ecef;
-        }
+.col-lg-6 {
+    padding: 15px; /* Add padding for better spacing */
+}
 
-        ul li:last-child {
-            border-bottom: none;
-        }
+h3 {
+    color: #007bff; /* Change heading color for better contrast */
+    font-size: 1.4rem;
+    margin-top: 30px;
+    font-weight: 500;
+    text-align: left; /* Center the subheading */
+}
 
-        p {
-            font-size: 1.1rem;
-            color: #495057;
-            margin-bottom: 10px;
-        }
+ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 20px;
+    text-align: left; /* Align list items to the left */
+}
 
-        .container {
-            max-width: 900px;
-            margin: auto;
-        }
+ul li {
+    padding: 12px 0; /* Increase padding for better touch */
+    font-size: 1.2rem;
+    color: #495057;
+    border-bottom: 1px solid #e9ecef;
+}
 
-        footer {
-            margin-top: 30px;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #6c757d;
+ul li:last-child {
+    border-bottom: none;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+}
+
+header > h1{
+    padding-top: 20px;
+    color:white;
+}
+
+    footer {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #6c757d;
         }
     </style>
 </head>
 <body>
     <header>
-    <h1>Start your test</h1>
+    <h1>Ransomware Readiness Assessment</h1>
 </header>
     <div class="container">
         <div class="result-container">
@@ -128,6 +137,7 @@
 
             <div class="row">
                 <div class="col-lg-6 col-md-12">
+
                     <h3>Test Summary:</h3>
                     <p><strong>Total Tests:</strong> {{ total_tests }}</p>
                     <p><strong>Passed Tests:</strong> {{ passed_tests }}</p>
@@ -138,13 +148,13 @@
                     </p>
 
                     <h3>System Information:</h3>
-<ul>
-    <li><strong>OS:</strong> {{ sys_info.OS }}</li>
-    <li><strong>OS Version:</strong> {{ sys_info.OS_Version }}</li>
-    <li><strong>Processor:</strong> {{ sys_info.Processor }}</li>
-    <li><strong>Hostname:</strong> {{ sys_info.Hostname }}</li>
-    <li><strong>RAM:</strong> {{ sys_info.RAM }}</li>
-</ul>
+                    <ul>
+                        <li><strong>OS:</strong> {{ sys_info.OS }}</li>
+                        <li><strong>OS Version:</strong> {{ sys_info.OS_Version }}</li>
+                        <li><strong>Processor:</strong> {{ sys_info.Processor }}</li>
+                        <li><strong>Hostname:</strong> {{ sys_info.Hostname }}</li>
+                        <li><strong>RAM:</strong> {{ sys_info.RAM }}</li>
+                    </ul>
                 </div>
 
                 <div class="col-lg-6 col-md-12 graph-container">
@@ -153,10 +163,9 @@
                 </div>
             </div>
         </div>
-      
     </div>
 <footer>
-    <p>Ransomware Readiness Assessment Tool</p>
+    <p>Ransomware Readiness Assessment</p>
 </footer>
 </body>
 </html>
