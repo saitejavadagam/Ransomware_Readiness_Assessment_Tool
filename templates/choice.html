@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test Choice</title>
     <style>
+
         body {
             font-family: Arial, sans-serif;
             padding: 0;
             background-color: #f4f4f4;
             margin: 0;
-            min-height: 100vh;
+            text-decoration: none;
         }
 
         header {
@@ -20,17 +21,59 @@
             text-align: center;
         }
 
-        .container {
-            height: 75vh;
-            width: 100%;
-        }
-
         footer {
             text-align: center;
             padding: 20px;
             background: #35424a;
             color: #ffffff;
         }
+
+.container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+    height: 76vh;
+    width: 100%;
+}
+
+.choice-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    color:black;
+    width: 200px;
+    height:200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+.choice-card:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.choice-card:active {
+    transform: scale(.98);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+}
+
+.choice-card h3 {
+    margin: 10px 0 0 0;
+}
+
+.icon {
+    font-size: 36px;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
     </style>
 </head>
 <body>
@@ -40,11 +83,22 @@
 </header>
 
 <div class="container">
-   
+    <form method="get" action="{{ url_for('testing_page') }}">
+    <button class="choice-card" type="submit">
+        <i class="icon fas fa-user"></i>
+        <h3>User Test</h3>
+    </button>
+    </form>
+    <form method="post" action="{{ url_for('security_tests.run_security_test') }}">
+    <button class="choice-card" type="submit">
+        <i class="icon fas fa-desktop"></i>
+        <h3>System Test</h3>
+    </button>
+    </form>
 </div>
 
 <footer>
-    <p>&copy; 2024 Ransomware Readiness Assessment Tool</p>
+    <p>Ransomware Readiness Assessment Tool</p>
 </footer>
 
 <script>

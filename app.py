@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request, jsonify, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
+from security_tests import security_tests_bp
 
 app = Flask(__name__)
+app.register_blueprint(security_tests_bp, url_prefix='/tests')
 CORS(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///progress.db'

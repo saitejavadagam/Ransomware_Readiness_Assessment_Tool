@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Test Results</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #f4f6f9;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+        }
+
+        header {
+            background: #35424a;
+            color: #ffffff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #35424a;
+            color: #ffffff;
+        }
+
+        .result-container {
+            margin-top: 50px;
+            padding: 40px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #007bff;
+            border-right: 5px solid #007bff;
+            transition: transform 0.3s;
+        }
+
+        .result-container:hover {
+            transform: translateY(-5px);
+        }
+
+        h1 {
+            font-weight: 700;
+            color: #007bff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            color: #17a2b8;
+            font-size: 1.85rem;
+            font-weight: 600;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #17a2b8;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #6c757d;
+            font-size: 1.4rem;
+            margin-top: 30px;
+            font-weight: 500;
+        }
+
+        .graph-container {
+            padding: 30px;
+            border-radius: 15px;
+            background-color: #f8f9fa;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+
+        .graph-container:hover {
+            background-color: #e2e6ea;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 20px;
+        }
+
+        ul li {
+            padding: 8px 0;
+            font-size: 1.2rem;
+            color: #495057;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        ul li:last-child {
+            border-bottom: none;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #495057;
+            margin-bottom: 10px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <header>
+    <h1>Start your test</h1>
+</header>
+    <div class="container">
+        <div class="result-container">
+            <h1>System Security Test Results</h1>
+
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <h3>Test Summary:</h3>
+                    <p><strong>Total Tests:</strong> {{ total_tests }}</p>
+                    <p><strong>Passed Tests:</strong> {{ passed_tests }}</p>
+                    <p><strong>Risk Level:</strong>
+                        <span style="color: {{ 'green' if risk_level == 'Safe' else 'orange' if risk_level == 'Medium' else 'red' }};">
+                            {{ risk_level }}
+                        </span>
+                    </p>
+
+                    <h3>System Information:</h3>
+<ul>
+    <li><strong>OS:</strong> {{ sys_info.OS }}</li>
+    <li><strong>OS Version:</strong> {{ sys_info.OS_Version }}</li>
+    <li><strong>Processor:</strong> {{ sys_info.Processor }}</li>
+    <li><strong>Hostname:</strong> {{ sys_info.Hostname }}</li>
+    <li><strong>RAM:</strong> {{ sys_info.RAM }}</li>
+</ul>
+                </div>
+
+                <div class="col-lg-6 col-md-12 graph-container">
+                    <h2>Security Test Results</h2>
+                    <img src="{{ url_for('static',filename='donut_chart.png') }}" alt="Donut chart" style="max-width: 100%;">
+                </div>
+            </div>
+        </div>
+      
+    </div>
+<footer>
+    <p>Ransomware Readiness Assessment Tool</p>
+</footer>
+</body>
+</html>
